@@ -26,7 +26,7 @@
                             </div>
 
                             <div class="mt-3 pb-3 border-b-2 border-dashed">
-                                <small class="block mb-2">ARK Address</small>
+                                <small class="block mb-2">OCKHAM Address</small>
                                 <span class="font-bold">
                                     {{ recipient }}
                                     <span class="clipboard float-right animated" @click="animateCopy">
@@ -90,7 +90,7 @@
 </template>
 
 <script>
-    import ArkPay from '@arkecosystem/pay'
+    import OckPay from '@arkecosystem/pay'
     import { sample } from 'lodash'
     import uuid from 'uuid/v1'
 
@@ -139,7 +139,7 @@
                 return `${this.timeMinutes}:${seconds}`
             },
             scanLink: function () {
-                return `ark:${this.recipient}?amount=${this.amountCrypto}&vendorField=${this.vendorField}`
+                return `ock:${this.recipient}?amount=${this.amountCrypto}&vendorField=${this.vendorField}`
             }
         },
         mounted() {
@@ -147,13 +147,13 @@
         },
         methods: {
             async setup () {
-                const gateway = new ArkPay()
+                const gateway = new OckPay()
                 gateway
                     .recipient(this.recipient)
                     .amount(this.amount)
                     .vendorField(this.vendorField)
-                    .currency('USD')
-                    .coin('ARK')
+                    .currency('EUR')
+                    .coin('OCK')
                     .network('devnet')
 
                 gateway.on('started', data => {
@@ -166,7 +166,7 @@
                 })
 
                 gateway.peers([{
-                    ip: 'dexplorer.ark.io',
+                    ip: 'dexplorer.ockham.consulting',
                     port: 8443,
                     protocol: 'https',
                 }])
